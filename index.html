@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/todo.png">
+    <title>To Do List Website</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h2>To Do List</h2>
+            <input type="text" placeholder="Write Here..." id="inputBox">
+            <ul id="list"></ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 ToDoListWebsite | Fatima Ayala</p>
+    </footer>
+    <script>
+        let inputBox = document.querySelector('#inputBox');
+        let list = document.querySelector('#list');
+
+        inputBox.addEventListener('keyup', function(event){
+            if(event.key === "Enter"){
+                addItem(this.value.trim());
+                this.value = ""; // Clear the input box
+            }
+        });
+
+        let addItem = (inputText) => {
+            if (inputText !== "") {
+                let listItem = document.createElement("li");
+                listItem.innerHTML = `${inputText}<i></i>`;
+
+                listItem.addEventListener('click', function(){
+                    this.classList.toggle('done');
+                });
+
+                listItem.querySelector('i').addEventListener('click',function() {
+                    listItem.remove();
+                });
+
+                list.appendChild(listItem);
+            }
+        };
+    </script>
+</body>
+</html>
